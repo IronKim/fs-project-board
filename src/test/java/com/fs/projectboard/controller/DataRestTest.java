@@ -1,5 +1,6 @@
 package com.fs.projectboard.controller;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+
 //@WebMvcTest // @WebMvcTest는 스프링 MVC 테스트를 위한 어노테이션이다.
+@Disabled("Spring Data REST 통합테스트는 불필요하므로 제외시킴") // @Disabled는 테스트를 비활성화 시킨다.
 @Transactional // @Transactional은 테스트 메소드가 실행된 후에 롤백을 수행한다.
 @DisplayName("Data REST - API 테스트")
 @AutoConfigureMockMvc // @AutoConfigureMockMvc는 MockMvc를 자동으로 설정해준다.
