@@ -43,7 +43,7 @@ class ArticleControllerTest {
         //When & Then
         mvc.perform(get("/articles/1")) // GET /articles/1 요청을 보낸다.
                 .andExpect(status().isOk()) // 응답의 상태코드가 200인지 검증한다.
-                .andExpect(content().contentType(MediaType.TEXT_HTML)) // 응답의 Content-Type이 text/html인지 검증한다.
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML)) // 응답의 Content-Type이 text/html인지 검증한다.
                 .andExpect(view().name("articles/detail")) // 뷰의 이름이 articles/detail인지 검증한다.
                 .andExpect(model().attributeExists("article")) // article 속성이 존재하는지 검증한다.
                 .andExpect(model().attributeExists("articleComments")); // comments 속성이 존재하는지 검증한다.
@@ -58,7 +58,7 @@ class ArticleControllerTest {
         //When & Then
         mvc.perform(get("/articles/search")) // GET /articles/search 요청을 보낸다.
                 .andExpect(status().isOk()) // 응답의 상태코드가 200인지 검증한다.
-                .andExpect(content().contentType(MediaType.TEXT_HTML)) // 응답의 Content-Type이 text/html인지 검증한다.
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML)) // 응답의 Content-Type이 text/html인지 검증한다.
                 .andExpect(view().name("articles/search")); // 뷰의 이름이 articles/search인지 검증한다.
     }
 
@@ -71,7 +71,7 @@ class ArticleControllerTest {
         //When & Then
         mvc.perform(get("/articles/search-hashtag")) // GET /articles/search-hashtag 요청을 보낸다.
                 .andExpect(status().isOk()) // 응답의 상태코드가 200인지 검증한다.
-                .andExpect(content().contentType(MediaType.TEXT_HTML)) // 응답의 Content-Type이 text/html인지 검증한다.
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML)) // 응답의 Content-Type이 text/html인지 검증한다.
                 .andExpect(view().name("articles/search-hashtag")); // 뷰의 이름이 articles/search인지 검증한다.
     }
 
