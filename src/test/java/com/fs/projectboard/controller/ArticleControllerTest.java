@@ -1,10 +1,12 @@
 package com.fs.projectboard.controller;
 
+import com.fs.projectboard.config.SecurityConfig;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -12,6 +14,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @DisplayName("View 컨트롤러 - 게시글")
+@Import(SecurityConfig.class) // @Import는 테스트에 필요한 설정 클래스를 임포트한다.
 @WebMvcTest(ArticleController.class) // @WebMvcTest는 스프링 MVC 테스트를 위한 어노테이션이다.
 class ArticleControllerTest {
 
