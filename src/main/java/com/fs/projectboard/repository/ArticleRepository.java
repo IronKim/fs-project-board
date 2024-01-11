@@ -4,6 +4,8 @@ import com.fs.projectboard.domain.Article;
 import com.fs.projectboard.domain.QArticle;
 import com.querydsl.core.types.dsl.DateTimeExpression;
 import com.querydsl.core.types.dsl.StringExpression;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
@@ -15,6 +17,8 @@ public interface ArticleRepository extends
         JpaRepository<Article, Long>,
         QuerydslPredicateExecutor<Article>,// QuerydslPredicateExecutor 인터페이스는 Querydsl을 사용하여 도메인 객체를 조회할 수 있게 해준다.
         QuerydslBinderCustomizer<QArticle> /* QuerydslBinderCustomizer 인터페이스는 Querydsl을 사용하여 도메인 객체를 조회할 때 사용할 바인더를 커스터마이징할 수 있게 해준다. */ {
+
+    Page<Article> findByTitle(String title, Pageable pageable);
 
     @Override
     default void customize(QuerydslBindings bindings, QArticle root) { // QuerydslBinderCustomizer 인터페이스의 customize 메소드를 구현한다.
