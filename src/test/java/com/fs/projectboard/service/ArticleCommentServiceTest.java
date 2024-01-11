@@ -36,7 +36,7 @@ class ArticleCommentServiceTest {
         // Given
         Long articleId = 1L;
         given(articleRepository.findById(articleId)).willReturn(Optional.of(
-                Article.of("title", "content", "#java"))
+                Article.of( "title", "content", "#java"))
         );
 
         // When
