@@ -37,9 +37,9 @@ public class Article extends AuditingFields {
     @Setter
     private String hashtag; // 해시태그
 
-    @OrderBy("createdAt DESC")
+    @OrderBy("createdAt DESC") // 최신 댓글이 먼저 보이도록 정렬
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
-    @ToString.Exclude
+    @ToString.Exclude // ArticleComment의 toString() 호출 시 Article의 toString()을 호출하므로 무한루프에 빠지지 않도록 한다.
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
 
 
