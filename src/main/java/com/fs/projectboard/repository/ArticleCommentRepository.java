@@ -10,11 +10,15 @@ import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+import java.util.List;
+
 @RepositoryRestResource
 public interface ArticleCommentRepository extends
         JpaRepository<ArticleComment, Long>,
         QuerydslPredicateExecutor<ArticleComment>,// QuerydslPredicateExecutor 인터페이스는 Querydsl을 사용하여 도메인 객체를 조회할 수 있게 해준다.
         QuerydslBinderCustomizer<QArticleComment> /* QuerydslBinderCustomizer 인터페이스는 Querydsl을 사용하여 도메인 객체를 조회할 때 사용할 바인더를 커스터마이징할 수 있게 해준다. */ {
+
+    List<ArticleComment> findByArticle_Id(Long articleId);
 
     @Override
     default void customize(QuerydslBindings bindings, QArticleComment root) { // QuerydslBinderCustomizer 인터페이스의 customize 메소드를 구현한다.
