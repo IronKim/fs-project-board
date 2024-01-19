@@ -1,8 +1,8 @@
 package com.fs.projectboard.controller;
 
 import com.fs.projectboard.domain.type.SearchType;
-import com.fs.projectboard.response.ArticleResponse;
-import com.fs.projectboard.response.ArticleWithCommentsResponse;
+import com.fs.projectboard.dto.response.ArticleResponse;
+import com.fs.projectboard.dto.response.ArticleWithCommentsResponse;
 import com.fs.projectboard.service.ArticleService;
 import com.fs.projectboard.service.PaginationService;
 import lombok.RequiredArgsConstructor;
