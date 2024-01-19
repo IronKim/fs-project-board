@@ -1,6 +1,6 @@
 package com.fs.projectboard.controller;
 
-import com.fs.projectboard.domain.type.SearchType;
+import com.fs.projectboard.domain.constant.SearchType;
 import com.fs.projectboard.dto.response.ArticleResponse;
 import com.fs.projectboard.dto.response.ArticleWithCommentsResponse;
 import com.fs.projectboard.service.ArticleService;
@@ -47,7 +47,7 @@ public class ArticleController {
 
     @GetMapping("/{articleId}")
     public String article(@PathVariable Long articleId, ModelMap map) {
-        ArticleWithCommentsResponse article = ArticleWithCommentsResponse.from(articleService.getArticle(articleId));
+        ArticleWithCommentsResponse article = ArticleWithCommentsResponse.from(articleService.getArticleWithComments(articleId));
         map.addAttribute("article", article);
         map.addAttribute("articleComments", article.articleCommentsResponse());
         map.addAttribute("totalCount", articleService.getArticleCount());

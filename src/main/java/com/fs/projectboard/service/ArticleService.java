@@ -1,10 +1,12 @@
 package com.fs.projectboard.service;
 
 import com.fs.projectboard.domain.Article;
-import com.fs.projectboard.domain.type.SearchType;
+import com.fs.projectboard.domain.UserAccount;
+import com.fs.projectboard.domain.constant.SearchType;
 import com.fs.projectboard.dto.ArticleDto;
 import com.fs.projectboard.dto.ArticleWithCommentsDto;
 import com.fs.projectboard.repository.ArticleRepository;
+import com.fs.projectboard.repository.UserAccountRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +24,7 @@ import java.util.List;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
+    private final UserAccountRepository userAccountRepository;
 
     @Transactional(readOnly = true) // 읽기 전용 트랜잭션을 사용한다. 이렇게 하면 트랜잭션을 시작하고 종료하는 오버헤드를 줄일 수 있다.
     public Page<ArticleDto> searchArticles(SearchType searchType, String searchKeyword, Pageable pageable) {
@@ -39,20 +42,28 @@ public class ArticleService {
     }
 
     @Transactional(readOnly = true)
-    public ArticleWithCommentsDto getArticle(Long articleId) {
+    public ArticleWithCommentsDto getArticleWithComments(Long articleId) {
         return  articleRepository.findById(articleId)
                 .map(ArticleWithCommentsDto::from)
                 .orElseThrow(() -> new EntityNotFoundException("게시글이 없습니다 - articleId: " + articleId));
 
     }
 
-    public void saveArticle(ArticleDto dto) {
-        articleRepository.save(dto.toEntity());
+    @Transactional(readOnly = true)
+    public ArticleDto getArticle(Long articleId) {
+        return articleRepository.findById(articleId)
+                .map(ArticleDto::from)
+                .orElseThrow(() -> new EntityNotFoundException("게시글이 없습니다 - articleId: " + articleId));
     }
 
-    public void updateArticle(ArticleDto dto) {
+    public void saveArticle(ArticleDto dto) {
+        UserAccount userAccount = userAccountRepository.getReferenceById(dto.userAccountDto().userId());
+        articleRepository.save(dto.toEntity(userAccount));
+    }
+
+    public void updateArticle(Long articleId, ArticleDto dto) {
         try {
-            Article article = articleRepository.getReferenceById(dto.id()); // getReferenceById 메소드는 EntityManager의 getReference 메소드를 사용하여 게시글을 조회한다.
+            Article article = articleRepository.getReferenceById(articleId); // getReferenceById 메소드는 EntityManager의 getReference 메소드를 사용하여 게시글을 조회한다.
                                                                             // 이렇게 하면 실제로 데이터베이스에서 게시글을 조회하지 않고, 게시글의 식별자만을 사용하여 게시글을 조회한다.
             if (dto.title() != null) { article.setTitle(dto.title()); }
             if (dto.content() != null) { article.setContent(dto.content()); }
