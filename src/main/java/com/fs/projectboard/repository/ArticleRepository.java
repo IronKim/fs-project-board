@@ -2,6 +2,7 @@ package com.fs.projectboard.repository;
 
 import com.fs.projectboard.domain.Article;
 import com.fs.projectboard.domain.QArticle;
+import com.fs.projectboard.repository.querydsl.ArticleRepositoryCustom;
 import com.querydsl.core.types.dsl.DateTimeExpression;
 import com.querydsl.core.types.dsl.StringExpression;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource
 public interface ArticleRepository extends
         JpaRepository<Article, Long>,
+        ArticleRepositoryCustom, // ArticleRepositoryCustom 인터페이스를 상속받는다.
         QuerydslPredicateExecutor<Article>,// QuerydslPredicateExecutor 인터페이스는 Querydsl을 사용하여 도메인 객체를 조회할 수 있게 해준다.
         QuerydslBinderCustomizer<QArticle> /* QuerydslBinderCustomizer 인터페이스는 Querydsl을 사용하여 도메인 객체를 조회할 때 사용할 바인더를 커스터마이징할 수 있게 해준다. */ {
 
