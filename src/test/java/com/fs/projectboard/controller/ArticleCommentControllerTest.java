@@ -1,6 +1,5 @@
 package com.fs.projectboard.controller;
 
-import com.fs.projectboard.config.SecurityConfig;
 import com.fs.projectboard.config.TestSecurityConfig;
 import com.fs.projectboard.dto.ArticleCommentDto;
 import com.fs.projectboard.dto.request.ArticleCommentRequest;
@@ -25,7 +24,6 @@ import static org.mockito.BDDMockito.willDoNothing;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 
 @DisplayName("View 컨트롤러 - 댓글")
 @Import({TestSecurityConfig.class, FormDataEncoder.class})
@@ -38,7 +36,7 @@ class ArticleCommentControllerTest {
     @MockBean private ArticleCommentService articleCommentService;
 
 
-    public ArticleCommentControllerTest(
+    ArticleCommentControllerTest(
             @Autowired MockMvc mvc,
             @Autowired FormDataEncoder formDataEncoder
     ) {
