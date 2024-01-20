@@ -1,6 +1,5 @@
 package com.fs.projectboard.controller;
 
-import com.fs.projectboard.config.SecurityConfig;
 import com.fs.projectboard.config.TestSecurityConfig;
 import com.fs.projectboard.service.ArticleService;
 import com.fs.projectboard.service.PaginationService;
@@ -12,11 +11,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import static org.mockito.BDDMockito.then;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @DisplayName("View 컨트롤러 - 인증")
 @Import(TestSecurityConfig.class) // @Import는 테스트에 필요한 설정 클래스를 임포트한다.

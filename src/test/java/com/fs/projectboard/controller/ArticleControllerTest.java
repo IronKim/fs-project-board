@@ -1,6 +1,5 @@
 package com.fs.projectboard.controller;
 
-import com.fs.projectboard.config.SecurityConfig;
 import com.fs.projectboard.config.TestSecurityConfig;
 import com.fs.projectboard.domain.constant.FormStatus;
 import com.fs.projectboard.domain.constant.SearchType;

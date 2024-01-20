@@ -2,7 +2,6 @@ package com.fs.projectboard.controller;
 
 import com.fs.projectboard.domain.constant.FormStatus;
 import com.fs.projectboard.domain.constant.SearchType;
-import com.fs.projectboard.dto.UserAccountDto;
 import com.fs.projectboard.dto.request.ArticleRequest;
 import com.fs.projectboard.dto.response.ArticleResponse;
 import com.fs.projectboard.dto.response.ArticleWithCommentsResponse;
@@ -102,7 +101,7 @@ public class ArticleController {
         return "articles/form";
     }
 
-    @PostMapping ("/{articleId}/form")
+    @PostMapping("/{articleId}/form")
     public String updateArticle(
             @PathVariable Long articleId,
             @AuthenticationPrincipal BoardPrincipal boardPrincipal,
@@ -113,7 +112,7 @@ public class ArticleController {
         return "redirect:/articles/" + articleId;
     }
 
-    @PostMapping ("/{articleId}/delete")
+    @PostMapping("/{articleId}/delete")
     public String deleteArticle(
             @PathVariable Long articleId,
             @AuthenticationPrincipal BoardPrincipal boardPrincipal // 로그인한 사용자 정보를 가져온다.
