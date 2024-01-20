@@ -21,11 +21,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DisplayName("Data REST - API 테스트")
 @AutoConfigureMockMvc // @AutoConfigureMockMvc는 MockMvc를 자동으로 설정해준다.
 @SpringBootTest // @SpringBootTest는 스프링 부트 테스트를 위한 어노테이션이다.
-public class DataRestTest {
+class DataRestTest {
 
     private final MockMvc mvc; // MockMvc는 스프링 MVC 테스트를 위한 클래스이다.
 
-    public DataRestTest(@Autowired MockMvc mvc) {
+    DataRestTest(@Autowired MockMvc mvc) {
         this.mvc = mvc;
     }
 

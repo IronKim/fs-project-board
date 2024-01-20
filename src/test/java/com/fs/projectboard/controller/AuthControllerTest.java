@@ -20,11 +20,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DisplayName("View 컨트롤러 - 인증")
 @Import(TestSecurityConfig.class) // @Import는 테스트에 필요한 설정 클래스를 임포트한다.
 @WebMvcTest(Void.class) // @WebMvcTest는 MVC 테스트를 위한 클래스이다.
-public class AuthControllerTest {
+class AuthControllerTest {
 
     private final MockMvc mvc; // MockMvc는 스프링 MVC 테스트를 위한 클래스이다.
 
-    public AuthControllerTest(@Autowired MockMvc mvc) {
+    AuthControllerTest(@Autowired MockMvc mvc) {
         this.mvc = mvc;
     }
 
@@ -36,7 +36,7 @@ public class AuthControllerTest {
 
     @DisplayName("[view][GET] 로그인 페이지 - 정상 호출")
     @Test
-    public void givenNothing_whenTryingToLogIn_thenReturnsLogInView() throws Exception {
+    void givenNothing_whenTryingToLogIn_thenReturnsLogInView() throws Exception {
         //Given
 
         //When & Then
