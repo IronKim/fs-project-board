@@ -20,3 +20,6 @@ Spring Boot
 
 * QueryDSL 5.0.0
 * Bootstrap 5.2.0-Beta1
+
+- 링크
+https://fs-project-board-deploy.fly.dev/
