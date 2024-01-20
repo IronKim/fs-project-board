@@ -19,6 +19,7 @@ public interface ArticleCommentRepository extends
         QuerydslBinderCustomizer<QArticleComment> /* QuerydslBinderCustomizer 인터페이스는 Querydsl을 사용하여 도메인 객체를 조회할 때 사용할 바인더를 커스터마이징할 수 있게 해준다. */ {
 
     List<ArticleComment> findByArticle_Id(Long articleId);
+    void deleteByIdAndUserAccount_UserId(Long articleCommentId, String userId);
 
     @Override
     default void customize(QuerydslBindings bindings, QArticleComment root) { // QuerydslBinderCustomizer 인터페이스의 customize 메소드를 구현한다.

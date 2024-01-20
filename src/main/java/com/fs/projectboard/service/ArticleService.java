@@ -63,18 +63,22 @@ public class ArticleService {
 
     public void updateArticle(Long articleId, ArticleDto dto) {
         try {
-            Article article = articleRepository.getReferenceById(articleId); // getReferenceById 메소드는 EntityManager의 getReference 메소드를 사용하여 게시글을 조회한다.
-                                                                            // 이렇게 하면 실제로 데이터베이스에서 게시글을 조회하지 않고, 게시글의 식별자만을 사용하여 게시글을 조회한다.
-            if (dto.title() != null) { article.setTitle(dto.title()); }
-            if (dto.content() != null) { article.setContent(dto.content()); }
-            article.setHashtag(dto.hashtag());
+            Article article = articleRepository.getReferenceById(articleId);    // getReferenceById 메소드는 EntityManager의 getReference 메소드를 사용하여 게시글을 조회한다.
+                                                                                // 이렇게 하면 실제로 데이터베이스에서 게시글을 조회하지 않고, 게시글의 식별자만을 사용하여 게시글을 조회한다.
+            UserAccount userAccount = userAccountRepository.getReferenceById(dto.userAccountDto().userId());
+
+            if (article.getUserAccount().equals(userAccount)) {
+                if (dto.title() != null) { article.setTitle(dto.title()); }
+                if (dto.content() != null) { article.setContent(dto.content()); }
+                article.setHashtag(dto.hashtag());
+            }
         } catch (EntityNotFoundException e) {
-            log.warn("게시글 업데이트 실패. 게시글을 찾을 수 없습니다 - dto: {}", dto); // {}를 사용하면 log.warn 메소드의 두 번째 인자로 전달한 dto 객체의 toString 메소드의 반환값이 {}에 대체된다
+            log.warn("게시글 업데이트 실패. 게시글을 수정하는데 필요한 정보를 찾을 수 없습니다 - {}", e.getLocalizedMessage()); // {}를 사용하면 log.warn 메소드의 두 번째 인자로 전달한 dto 객체의 toString 메소드의 반환값이 {}에 대체된다
         }
     }
 
-    public void deleteArticle(long articleId) {
-        articleRepository.deleteById(articleId);
+    public void deleteArticle(long articleId, String userId) {
+        articleRepository.deleteByIdAndUserAccount_UserId(articleId, userId);
     }
 
     public long getArticleCount() {
