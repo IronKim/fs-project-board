@@ -24,18 +24,17 @@ public interface ArticleRepository extends
     Page<Article> findByContentContaining(String content, Pageable pageable);
     Page<Article> findByUserAccount_UserIdContaining(String userId, Pageable pageable);
     Page<Article> findByUserAccount_NicknameContaining(String nickname, Pageable pageable);
-    Page<Article> findByHashtag(String hashtag, Pageable pageable);
 
     void deleteByIdAndUserAccount_UserId(Long articleId, String userid);
 
     @Override
     default void customize(QuerydslBindings bindings, QArticle root) { // QuerydslBinderCustomizer 인터페이스의 customize 메소드를 구현한다.
         bindings.excludeUnlistedProperties(true); // 기본적으로 제공되는 모든 필드를 사용하지 않도록 설정한다.
-        bindings.including(root.title, root.content, root.hashtag, root.createdAt, root.createdBy); // title, content, hashtag, createdAt, createdBy 필드만 사용하도록 설정한다.
-        //bindings.bind(root.title).first(StringExpression::likeIgnoreCase); // like '${v}' / title 필드는 대소문자를 구분하지 않고 like 검색을 수행한다.
+        bindings.including(root.title, root.content, root.hashtags, root.createdAt, root.createdBy); // title, content, hashtags, createdAt, createdBy 필드만 사용하도록 설정한다.
+        bindings.bind(root.title).first(StringExpression::likeIgnoreCase); // like '${v}' / title 필드는 대소문자를 구분하지 않고 like 검색을 수행한다.
         bindings.bind(root.title).first(StringExpression::containsIgnoreCase); // like '%${v}%' / title 필드는 대소문자를 구분하지 않고 contains 검색을 수행한다.
         bindings.bind(root.content).first(StringExpression::containsIgnoreCase); // like '%${v}%' / content 필드는 대소문자를 구분하지 않고 contains 검색을 수행한다.
-        bindings.bind(root.hashtag).first(StringExpression::containsIgnoreCase); // like '%${v}%' / hashtag 필드는 대소문자를 구분하지 않고 contains 검색을 수행한다.
+        bindings.bind(root.hashtags.any().hashtagName).first(StringExpression::containsIgnoreCase); // like '%${v}%' / hashtags 필드는 대소문자를 구분하지 않고 contains 검색을 수행한다.
         bindings.bind(root.createdAt).first(DateTimeExpression::eq); // createdAt 필드는 eq 검색을 수행한다.
         bindings.bind(root.createdBy).first(StringExpression::containsIgnoreCase); // like '%${v}%' / createdBy 필드는 대소문자를 구분하지 않고 contains 검색을 수행한다.
 
