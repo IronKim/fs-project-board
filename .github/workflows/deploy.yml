@@ -7,7 +7,6 @@ on:
       - fly.toml
       - Dockerfile
       - .github/workflows/deploy.yml
-      - .dockerignore
     branches:
       - main
 jobs:

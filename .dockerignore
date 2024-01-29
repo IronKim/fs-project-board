@@ -7,3 +7,15 @@ Dockerfile
 *.sh
 *.yml
 scripts
+
+*.class
+target/
+out/
+build/
+
+*.log
+*.tmp
+
+.vscode/
+.idea/
+test-results/
