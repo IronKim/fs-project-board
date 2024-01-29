@@ -6,6 +6,7 @@ on:
       - src/**
       - fly.toml
       - Dockerfile
+      - .dockerignore
       - .github/workflows/deploy.yml
     branches:
       - main
