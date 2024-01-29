@@ -6,7 +6,6 @@ on:
       - src/**
       - fly.toml
       - Dockerfile
-      - .dockerignore
       - .github/workflows/deploy.yml
     branches:
       - main
@@ -17,8 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
-        with:
-          version: 0.0.462
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
