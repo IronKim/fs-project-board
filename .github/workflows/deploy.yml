@@ -1,6 +1,12 @@
 name: Fly Deploy
 on:
   push:
+    paths:
+      - build.gradle
+      - src/**
+      - fly.toml
+      - Dockerfile
+      - .github/workflows/deploy.yml
     branches:
       - main
 jobs:
@@ -8,7 +14,11 @@ jobs:
     name: Deploy app
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - name: application-secret.yml 생성
+        env:
+          APPLICATION_SECRET: ${{ secrets.APPLICATION_SECRET_YML }}
+        run: echo "$APPLICATION_SECRET" > src/main/resources/application-secret.yml
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
         env:
