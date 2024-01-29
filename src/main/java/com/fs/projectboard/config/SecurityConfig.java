@@ -1,15 +1,12 @@
 package com.fs.projectboard.config;
 
-import com.fs.projectboard.dto.UserAccountDto;
 import com.fs.projectboard.dto.security.BoardPrincipal;
 import com.fs.projectboard.dto.security.KakaoOAuth2Response;
-import com.fs.projectboard.repository.UserAccountRepository;
 import com.fs.projectboard.service.UserAccountService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,8 +19,6 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.UUID;
-
-import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class SecurityConfig {
@@ -44,7 +39,7 @@ public class SecurityConfig {
                             "/articles/search-hashtag"
                     ).permitAll()
                     .anyRequest().authenticated())
-            .formLogin(withDefaults())
+            .formLogin(login -> login.defaultSuccessUrl("/",true))
             .logout(logout -> logout.logoutSuccessUrl("/"))
                 .oauth2Login(oAuth -> oAuth
                         .userInfoEndpoint(userInfo -> userInfo
