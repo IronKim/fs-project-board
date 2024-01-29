@@ -171,7 +171,6 @@ src\main\generated
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
-**\.history
 **\.ionide
 
 ### Windows ###
@@ -185,7 +184,7 @@ src\main\generated
 **\*.stackdump
 
 # Folder config file
-**\[Dd]esktop.ini
+**\Desktop.ini
 
 # Recycle Bin used on file shares
 **\$RECYCLE.BIN
