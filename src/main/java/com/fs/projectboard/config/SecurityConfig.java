@@ -32,6 +32,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers(
                             PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                    .requestMatchers("api/**").permitAll()
                     .requestMatchers(
                             HttpMethod.GET,
                             "/",
@@ -39,6 +40,7 @@ public class SecurityConfig {
                             "/articles/search-hashtag"
                     ).permitAll()
                     .anyRequest().authenticated())
+            .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"))
             .formLogin(login -> login.defaultSuccessUrl("/",true))
             .logout(logout -> logout.logoutSuccessUrl("/"))
                 .oauth2Login(oAuth -> oAuth
