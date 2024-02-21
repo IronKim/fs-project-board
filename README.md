@@ -12,6 +12,7 @@ Spring Boot
 * Spring Security
 * H2 Database
 * MySQL Driver
+* postgresql driver
 * Lombok
 * Spring Boot DevTools
 * Spring Configuration Processor
